@@ -29,14 +29,11 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && _isGrounded)
         {
-            Debug.Log("‰Ÿ‚³‚ê‚Ä‚é");
             _isGrounded = false;
             velocity.y = _jumpSpeed;
         }
         else if (!Input.GetButton("Jump") && velocity.y > 0)
         {
-            Debug.Log("‰Ÿ‚³‚ê‚Ä‚é");
-            
             velocity.y *= _gravityDrag;
         }
 
