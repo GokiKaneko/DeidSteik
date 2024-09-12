@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;  // 追加：Sliderを扱うために必要
 
 public class boss : MonoBehaviour
 {
     /// <summary>敵のライフ</summary>
     [SerializeField] int m_life = 1;
+    /// <summary>最大ライフ</summary>
+    [SerializeField] int m_maxLife = 1;  // ボスの最大ライフを追加
     /// <summary>敵の弾のプレハブ</summary>
     [SerializeField] GameObject m_enemyBulletPrefab = null;
     /// <summary>敵が弾を発射する間隔（秒）</summary>
@@ -14,10 +17,22 @@ public class boss : MonoBehaviour
     [SerializeField] Transform[] m_muzzles = null;
     /// <summary>爆発エフェクトのプレハブ</summary>
     [SerializeField] GameObject m_explosionPrefab = null;
+    /// <summary>HP表示用のSlider</summary>
+    [SerializeField] Slider m_hpSlider = null;  // 追加：HPバー用のSliderをリンク
     float m_timer;
 
     void Start()
     {
+        // ライフの初期化
+        m_life = m_maxLife;  // 現在のライフを最大ライフで初期化
+
+        // HPスライダーの初期設定
+        if (m_hpSlider != null)
+        {
+            m_hpSlider.maxValue = m_maxLife;  // 最大ライフに合わせる
+            m_hpSlider.value = m_life;  // 現在のライフをスライダーに反映
+        }
+
         // muzzle が設定されていなかったら自分自身の座標から弾を発射する
         if (m_muzzles == null || m_muzzles.Length == 0)
         {
@@ -46,10 +61,16 @@ public class boss : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerController>())  // 衝突相手が 弾 だったら
+        if (collision.gameObject.GetComponent<PlayerController>())  // 衝突相手がプレイヤーの弾だったら
         {
             Destroy(collision.gameObject);  // 弾のオブジェクトを破棄する
             m_life--;   // ライフを減らす
+
+            // HPスライダーを更新する
+            if (m_hpSlider != null)
+            {
+                m_hpSlider.value = m_life;  // 現在のライフをスライダーに反映
+            }
 
             // ライフが 0 だったら
             if (m_life < 1)
@@ -59,8 +80,9 @@ public class boss : MonoBehaviour
                 {
                     Instantiate(m_explosionPrefab, this.transform.position, m_explosionPrefab.transform.rotation);
                 }
-                Destroy(this.gameObject);       // そして自分も破棄する
+                Destroy(this.gameObject);  // 自分自身を破棄する
             }
         }
     }
 }
+
