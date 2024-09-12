@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;  // 追加：Sliderを扱うために必要
+using UnityEngine.UI;
+using DG.Tweening;  // DOTween を使用するために追加
 
 public class boss : MonoBehaviour
 {
@@ -24,13 +25,13 @@ public class boss : MonoBehaviour
     void Start()
     {
         // ライフの初期化
-        m_life = m_maxLife;  // 現在のライフを最大ライフで初期化
+        m_life = m_maxLife;
 
         // HPスライダーの初期設定
         if (m_hpSlider != null)
         {
-            m_hpSlider.maxValue = m_maxLife;  // 最大ライフに合わせる
-            m_hpSlider.value = m_life;  // 現在のライフをスライダーに反映
+            m_hpSlider.maxValue = m_maxLife;
+            m_hpSlider.value = m_life;
         }
 
         // muzzle が設定されていなかったら自分自身の座標から弾を発射する
@@ -61,15 +62,17 @@ public class boss : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerController>())  // 衝突相手がプレイヤーの弾だったら
+        // 衝突したオブジェクトが "PlayerBullet" タグを持っていたら
+        if (collision.gameObject.CompareTag("PlayerBullet"))
         {
             Destroy(collision.gameObject);  // 弾のオブジェクトを破棄する
-            m_life--;   // ライフを減らす
+            m_life--;   // ボスのライフを減らす
 
-            // HPスライダーを更新する
+            // HPスライダーをアニメーションで減少させる
             if (m_hpSlider != null)
             {
-                m_hpSlider.value = m_life;  // 現在のライフをスライダーに反映
+                // DOTween を使用して HP を滑らかに減少させる
+                m_hpSlider.DOValue(m_life, 0.5f);  // 0.5秒でライフを更新
             }
 
             // ライフが 0 だったら
@@ -80,9 +83,8 @@ public class boss : MonoBehaviour
                 {
                     Instantiate(m_explosionPrefab, this.transform.position, m_explosionPrefab.transform.rotation);
                 }
-                Destroy(this.gameObject);  // 自分自身を破棄する
+                Destroy(this.gameObject);  // ボス自体を破棄する
             }
         }
     }
 }
-
