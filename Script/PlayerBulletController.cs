@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class PlayerBulletController : MonoBehaviour
 {
-    /// <summary>’e‚Ì”ò‚Ô‘¬“x</summary>
     [SerializeField] float m_bulletSpeed = 10f;
-    /// <summary>’e‚ª”ò‚ÔÅ‘å‹——£</summary>
     [SerializeField] float m_maxDistance = 15f;
     Rigidbody2D m_rb;
     Transform playerTransform;
     SpriteRenderer playerSprite;
-
-    // ”­Ë‚ÌˆÊ’u‚ğ‹L˜^‚·‚é•Ï”
     Vector3 startPosition;
 
     void Start()

@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Gameover : MonoBehaviour
 {
-    public GameObject player; // Playerオブジェクトをアサイン
-    public GameObject objectToActivate; // Playerが消えたときにアクティブにするオブジェクト
+    public GameObject player;
+    public GameObject objectToActivate; 
 
     void Update()
     {
