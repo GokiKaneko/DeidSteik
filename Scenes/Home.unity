@@ -566,6 +566,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Warp (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6096514379181326757, guid: b3f5ffa328c10c04c99f0b56e7fd40d1, type: 3}
+      propertyPath: Scene
+      value: 2-1
+      objectReference: {fileID: 0}
     - target: {fileID: 7463475466308028038, guid: b3f5ffa328c10c04c99f0b56e7fd40d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.24
@@ -847,6 +851,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Warp (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6096514379181326757, guid: b3f5ffa328c10c04c99f0b56e7fd40d1, type: 3}
+      propertyPath: Scene
+      value: BOSS
+      objectReference: {fileID: 0}
     - target: {fileID: 7463475466308028038, guid: b3f5ffa328c10c04c99f0b56e7fd40d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.23605779
@@ -922,6 +930,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e2999f29c1d4f44bb223c20b6573bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scene1BGM: {fileID: 8300000, guid: 1682e9aac1687ee4c9249072c7e7b548, type: 3}
+  scene2BGM: {fileID: 8300000, guid: ce312568e22517e4183dd868706382f7, type: 3}
+  scene3BGM: {fileID: 8300000, guid: c18764ca5ff04bd4fa1487467ed191d1, type: 3}
+  scene4BGM: {fileID: 8300000, guid: ce312568e22517e4183dd868706382f7, type: 3}
+  scene5BGM: {fileID: 8300000, guid: ce312568e22517e4183dd868706382f7, type: 3}
 --- !u!82 &1794481295
 AudioSource:
   m_ObjectHideFlags: 0
@@ -934,7 +947,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ce312568e22517e4183dd868706382f7, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.567
   m_Pitch: 1
   Loop: 1
   Mute: 0
